@@ -1,12 +1,16 @@
 package com.arash.altafi.sample_flow_3
 
+import android.view.View
+import androidx.annotation.CheckResult
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.launch
 
 @Deprecated(
@@ -46,3 +50,11 @@ inline fun <T> Flow<T>.collectInViewLifecycle(
     minActiveState = minActiveState,
     action = action,
 )
+
+@CheckResult
+fun View.clicks(): Flow<Unit> {
+    return callbackFlow {
+        setOnClickListener { trySend(Unit) }
+        awaitClose { setOnClickListener(null) }
+    }
+}

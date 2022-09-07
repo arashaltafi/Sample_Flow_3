@@ -1,33 +1,39 @@
 package com.arash.altafi.sample_flow_3
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
-import androidx.annotation.CheckResult
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.arash.altafi.sample_flow_3.MainState.WatchState
 import com.arash.altafi.sample_flow_3.databinding.ActivityMainBinding
+import com.arash.altafi.sample_flow_3.stateSharedLiveData.StateSharedLiveDataActivity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
-import kotlin.LazyThreadSafetyMode.NONE
 
 @ExperimentalCoroutinesApi
 @FlowPreview
 class MainActivity : AppCompatActivity() {
-    private val vm by viewModels<MainVM>()
-    private val binding by lazy(NONE) { ActivityMainBinding.inflate(layoutInflater) }
+
+    private val viewModel by viewModels<MainVM>()
+    private val binding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        vm.stateFlow.collectIn(this) { render(it) }
+        binding.btnStateSharedLiveData.setOnClickListener {
+            startActivity(Intent(this, StateSharedLiveDataActivity::class.java))
+        }
+
+        viewModel.stateFlow.collectIn(this) { render(it) }
 
         actionFlow()
-            .onEach { vm.process(it) }
+            .onEach { viewModel.process(it) }
             .launchIn(lifecycleScope)
     }
 
@@ -39,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    @SuppressLint("SetTextI18n")
     private fun render(state: MainState) {
         val mm = (state.seconds / 60).toString().padStart(2, '0')
         val ss = (state.seconds % 60).toString().padStart(2, '0')
@@ -70,13 +77,5 @@ class MainActivity : AppCompatActivity() {
                 binding.buttonReset.isEnabled = false
             }
         }
-    }
-}
-
-@CheckResult
-fun View.clicks(): Flow<Unit> {
-    return callbackFlow {
-        setOnClickListener { trySend(Unit) }
-        awaitClose { setOnClickListener(null) }
     }
 }

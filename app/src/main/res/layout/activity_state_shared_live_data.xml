@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp"
+    tools:context=".stateSharedLiveData.StateSharedLiveDataActivity">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtLiveData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            tools:text="sample liveData" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLiveData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="live data" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtStateFlow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            tools:text="sample State Flow" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnStateFlow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="state Flow" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtFlow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            tools:text="sample Flow" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFlow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Flow" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtSharedFlow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            tools:text="sample Shared Flow" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSharedFlow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Shared Flow" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.core.widget.NestedScrollView>
